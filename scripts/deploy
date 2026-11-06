@@ -1,0 +1,3 @@
+#!/bin/sh
+set -eu
+printf '%s\n' 'No deployment configured; the public Git repository is the delivery target.'

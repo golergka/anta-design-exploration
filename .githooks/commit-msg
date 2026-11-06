@@ -1,0 +1,7 @@
+#!/bin/sh
+# coloph-sync managed hook
+previous="$(dirname "$0")/commit-msg.before-coloph-sync"
+if [ -x "$previous" ]; then "$previous" "$@" || exit $?; fi
+root="$(git rev-parse --show-toplevel)" || exit $?
+cd "$root" || exit $?
+exec uv run coloph-sync hook "$@"
