@@ -1,0 +1,4 @@
+# Local output from TypeScript and the bundled skill installer
+*.tsbuildinfo
+.agents/
+.claude/
