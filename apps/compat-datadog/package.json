@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run build && node test-browser.mjs",
     "dev": "vite",
     "build": "vite build"
   },
@@ -12,13 +12,16 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "private": "true",
+  "private": true,
   "dependencies": {
-    "@antadesign/anta": "^0.3.38",
+    "@antadesign/anta": "0.3.38",
     "@tanstack/react-table": "8.21.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "recharts": "^3.10.1",
     "vite": "^7.3.7"
+  },
+  "devDependencies": {
+    "playwright": "1.65.0"
   }
 }
