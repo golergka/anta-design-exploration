@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test'
+test('editor, tabs, theme and narrow layout', async ({ page }) => {
+ await page.goto('/')
+ await expect(page.locator('.monaco-editor')).toBeVisible()
+ await expect(page.locator('.monaco-editor')).toHaveJSProperty('clientWidth', await page.locator('.editor').evaluate(e=>e.clientWidth))
+ await page.getByRole('tab', {name:'Problems · 1'}).click()
+ await expect(page.getByText('Consider adding a LIMIT')).toBeVisible()
+ await page.getByRole('tab', {name:'Results'}).focus()
+ await page.keyboard.press('ArrowRight')
+ await expect(page.getByText('Consider adding a LIMIT')).toBeVisible()
+ await page.getByRole('button', {name:'Dark mode'}).click()
+ await expect(page.locator('.shell')).toHaveClass(/dark/)
+ await page.getByRole('button', {name:'schema.sql'}).click()
+ await expect(page.locator('.crumb')).toContainText('schema.sql')
+ await page.setViewportSize({width:390,height:700})
+ await expect(page.locator('.monaco-editor')).toBeVisible()
+ expect(await page.locator('.editor').evaluate(e=>e.clientWidth)).toBeGreaterThan(100)
+})
