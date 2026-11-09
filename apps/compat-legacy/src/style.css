@@ -2,3 +2,5 @@ body { background: #f4f6f8; color: #233142; }
 h1 { font-size: 1.8rem; font-weight: 700; }
 .card { border-color: #dce3e9; box-shadow: 0 2px 8px #2130400d; }
 .assignment { display: grid; gap: 1rem; }
+
+:root.legacy-root-size { font-size: 16px; }
