@@ -1,0 +1,28 @@
+{
+  "name": "compat-legacy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node check-styles.mjs",
+    "dev": "vite",
+    "build": "vite build",
+    "check:styles": "node check-styles.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@antadesign/anta": "0.3.38",
+    "@vitejs/plugin-react": "^5.1.1",
+    "bootstrap": "^5.3.8",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vite": "^7.3.7"
+  },
+  "devDependencies": {
+    "playwright": "1.65.0"
+  }
+}
