@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+for dir in apps/compat-*; do
+  [ -f "$dir/package-lock.json" ] || continue
+  (cd "$dir" && npm ci --no-audit --no-fund && npm run build && npm test)
+done
