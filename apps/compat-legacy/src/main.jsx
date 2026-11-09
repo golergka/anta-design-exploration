@@ -3,7 +3,7 @@ import {createRoot} from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Select, Input, Button} from '@antadesign/anta/bundle';
 if (new URLSearchParams(location.search).has('no-reset')) {
-  document.documentElement.classList.add('legacy-root-size');
+  if (new URLSearchParams(location.search).has('root-size')) document.documentElement.classList.add('legacy-root-size');
   await import('@antadesign/anta/tokens.css');
   await import('@antadesign/anta/elements');
 } else {
