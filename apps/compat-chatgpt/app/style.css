@@ -1,1 +1,93 @@
-body{margin:0;font-family:system-ui;color:#25252c} .shell{display:flex;min-height:100vh} aside{width:230px;background:#f4f4f2;padding:24px;display:flex;flex-direction:column;gap:20px} aside a{color:inherit} main{flex:1;padding:24px;display:flex;flex-direction:column;max-width:1000px;margin:auto;width:100%;box-sizing:border-box} header{display:flex;justify-content:space-between;align-items:center} header span,small{color:#777} .conversation{min-height:55vh;display:flex;flex-direction:column;gap:16px;padding:32px 0}.welcome{margin:auto;text-align:center}.message{align-self:flex-end;background:#efefed;padding:14px 20px;border-radius:18px}.response{padding:12px}.compose{display:flex;align-items:end;gap:12px}.compose a-input{flex:1}small{text-align:center;margin:12px}@media(max-width:600px){aside{width:auto;padding:12px}aside p,aside strong{display:none}.shell{flex-direction:column}aside{flex-direction:row}main{padding:16px}.conversation{min-height:48vh}}
+body {
+  margin: 0;
+  font-family: system-ui;
+  color: #25252c;
+}
+.shell {
+  display: flex;
+  min-height: 100vh;
+}
+aside {
+  width: 230px;
+  background: #f4f4f2;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+aside a {
+  color: inherit;
+}
+main {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header span,
+small {
+  color: #777;
+}
+.conversation {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 0;
+}
+.welcome {
+  margin: auto;
+  text-align: center;
+}
+.message {
+  align-self: flex-end;
+  background: #efefed;
+  padding: 14px 20px;
+  border-radius: 18px;
+}
+.response {
+  padding: 12px;
+}
+.compose {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+}
+.compose a-input {
+  flex: 1;
+}
+small {
+  text-align: center;
+  margin: 12px;
+}
+@media (max-width: 600px) {
+  aside {
+    width: auto;
+    padding: 12px;
+  }
+  aside p,
+  aside strong {
+    display: none;
+  }
+  .shell {
+    flex-direction: column;
+  }
+  aside {
+    flex-direction: row;
+  }
+  main {
+    padding: 16px;
+  }
+  .conversation {
+    min-height: 48vh;
+  }
+}

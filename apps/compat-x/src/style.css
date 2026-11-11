@@ -1,1 +1,101 @@
-body{margin:0;font-family:system-ui}.app{min-height:100vh;display:flex;justify-content:center;background:#fff;color:#15171a}.app.dark{background:#12171c;color:#f2f5f8;color-scheme:dark}nav{width:180px;padding:24px;font-size:19px}nav strong{font-size:32px}main{width:600px;border-inline:1px solid #ddd}header{padding:18px;display:flex;align-items:center;justify-content:space-between}.composer{padding:20px;display:flex;align-items:end;gap:12px}.composer a-input{flex:1}.fixtures{display:flex;align-items:center;gap:8px;padding:10px 20px}.feed{height:65vh;overflow:auto}article{box-sizing:border-box;display:flex;gap:12px;padding:16px 20px;border-top:1px solid #ddd}article p{margin:8px 0}article span{color:#777}.avatar{background:#c7dcec;border-radius:50%;height:40px;width:40px;display:grid;place-items:center;flex:none;color:#123}aside{width:260px;padding:24px}aside h2{font-size:18px}@media(max-width:800px){aside{display:none}nav{width:55px;padding:12px}nav p{font-size:12px}main{width:min(600px,calc(100% - 80px))}.fixtures{flex-wrap:wrap}}
+body {
+  margin: 0;
+  font-family: system-ui;
+}
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: #fff;
+  color: #15171a;
+}
+.app.dark {
+  background: #12171c;
+  color: #f2f5f8;
+  color-scheme: dark;
+}
+nav {
+  width: 180px;
+  padding: 24px;
+  font-size: 19px;
+}
+nav strong {
+  font-size: 32px;
+}
+main {
+  width: 600px;
+  border-inline: 1px solid #ddd;
+}
+header {
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.composer {
+  padding: 20px;
+  display: flex;
+  align-items: end;
+  gap: 12px;
+}
+.composer a-input {
+  flex: 1;
+}
+.fixtures {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+}
+.feed {
+  height: 65vh;
+  overflow: auto;
+}
+article {
+  box-sizing: border-box;
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid #ddd;
+}
+article p {
+  margin: 8px 0;
+}
+article span {
+  color: #777;
+}
+.avatar {
+  background: #c7dcec;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: #123;
+}
+aside {
+  width: 260px;
+  padding: 24px;
+}
+aside h2 {
+  font-size: 18px;
+}
+@media (max-width: 800px) {
+  aside {
+    display: none;
+  }
+  nav {
+    width: 55px;
+    padding: 12px;
+  }
+  nav p {
+    font-size: 12px;
+  }
+  main {
+    width: min(600px, calc(100% - 80px));
+  }
+  .fixtures {
+    flex-wrap: wrap;
+  }
+}

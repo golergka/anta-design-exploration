@@ -1,0 +1,12 @@
+node_modules/
+dist/
+out/
+.next/
+.venv/
+.history-rewrite-work/
+.agents/
+.claude/
+test-results/
+playwright-report/
+package-lock.json
+next-env.d.ts

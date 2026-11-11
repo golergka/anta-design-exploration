@@ -1,17 +1,184 @@
-import React, {useRef,useState} from 'react';
-import {createRoot} from 'react-dom/client';
-import {QueryClient,QueryClientProvider,useQuery} from '@tanstack/react-query';
-import {useVirtualizer} from '@tanstack/react-virtual';
-import {Button,Input,Tabs,Title} from '@antadesign/anta/bundle';
+import React, { useRef, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
+import { useVirtualizer } from '@tanstack/react-virtual';
+import { Button, Input, Tabs, Title } from '@antadesign/anta/bundle';
 import '@antadesign/anta/bundle.css';
 import './style.css';
-type Post={id:string;text:string};
-const fixtures:Post[]=Array.from({length:100},(_,i)=>({id:`post-${i}`,text:`Post ${i+1}: ${i%3===0?'A longer thought about building useful things together. ':''}A small update from the community.`}));
-const client=new QueryClient({defaultOptions:{queries:{retry:false}}});
-function App(){const [tab,setTab]=useState('all'),[mode,setMode]=useState('success'),[draft,setDraft]=useState(''),[posts,setPosts]=useState<Post[]>([]),[dark,setDark]=useState(false),[expanded,setExpanded]=useState<string[]>([]),[likes,setLikes]=useState<string[]>([]);const scroll=useRef<HTMLDivElement>(null);
- const query=useQuery({queryKey:['feed',mode],queryFn:async()=>{await new Promise(r=>setTimeout(r,300));if(mode==='error')throw Error('Fixture failed');return fixtures}});
- const items=[...posts,...(query.data??[])].filter((_,i)=>tab==='all'||i%2===0);
- const virtual=useVirtualizer({count:items.length,getScrollElement:()=>scroll.current,estimateSize:()=>120,getItemKey:i=>items[i].id,overscan:4});
- function post(){if(!draft.trim())return;setPosts(p=>[{id:`new-${Date.now()}`,text:draft},...p]);setDraft('');scroll.current?.scrollTo({top:0})}
- return <div className={dark?'app dark':'app'}><nav><strong>✳</strong><p>Home</p><p>Explore</p><p>Profile</p></nav><main><header><Title>Home · compat-v2</Title><Button label={dark?'Light theme':'Dark theme'} onClick={()=>setDark(!dark)}/></header><Tabs label="Feed" value={tab} onStateChange={(_e,{next})=>next&&setTab(next)} options={[{value:'all',label:'For you'},{value:'following',label:'Following'}]} fill/><section className="composer"><Input label="Your post" value={draft} onValueChange={(_e,{value})=>setDraft(value)} placeholder="What is happening?"/><Button label="Post" priority="primary" tone="brand" onClick={post}/></section><div className="fixtures"><span>Fixture:</span>{['success','loading','error'].map(m=><Button key={m} label={m} selected={mode===m} onClick={()=>setMode(m)}/>)}</div>{mode==='loading'?<p role="status">Loading fixture…</p>:query.isPending?<p role="status">Loading fixture…</p>:query.isError?<p role="alert">Could not load feed. Choose success to retry.</p>:<div className="feed" ref={scroll} tabIndex={0} aria-label="Feed posts"><div style={{height:virtual.getTotalSize(),position:'relative'}}>{virtual.getVirtualItems().map(row=>{const item=items[row.index];return <article key={row.key} data-index={row.index} ref={virtual.measureElement} style={{position:'absolute',top:0,left:0,width:'100%',transform:`translateY(${row.start}px)`}}><div className="avatar">{item.id.startsWith('new')?'Y':'A'}</div><div><b>{item.id.startsWith('new')?'You':'Avery'}</b> <span>@community · now</span><p>{item.text}</p>{expanded.includes(item.id)&&<p>Expanded detail adds height to this virtual row, testing dynamic measurement.</p>}<Button label={likes.includes(item.id)?'Unlike':'Like'} selected={likes.includes(item.id)} onClick={()=>setLikes(l=>l.includes(item.id)?l.filter(x=>x!==item.id):[...l,item.id])}/><Button label={expanded.includes(item.id)?'Less':'More'} priority="tertiary" onClick={()=>setExpanded(e=>e.includes(item.id)?e.filter(x=>x!==item.id):[...e,item.id])}/></div></article>})}</div></div>}</main><aside><h2>What’s happening</h2><p>A small, local feed for testing.</p></aside></div>}
-createRoot(document.getElementById('root')!).render(<QueryClientProvider client={client}><App/></QueryClientProvider>);
+type Post = { id: string; text: string };
+const fixtures: Post[] = Array.from({ length: 100 }, (_, i) => ({
+  id: `post-${i}`,
+  text: `Post ${i + 1}: ${i % 3 === 0 ? 'A longer thought about building useful things together. ' : ''}A small update from the community.`,
+}));
+const client = new QueryClient({
+  defaultOptions: { queries: { retry: false } },
+});
+function App() {
+  const [tab, setTab] = useState('all'),
+    [mode, setMode] = useState('success'),
+    [draft, setDraft] = useState(''),
+    [posts, setPosts] = useState<Post[]>([]),
+    [dark, setDark] = useState(false),
+    [expanded, setExpanded] = useState<string[]>([]),
+    [likes, setLikes] = useState<string[]>([]);
+  const scroll = useRef<HTMLDivElement>(null);
+  const query = useQuery({
+    queryKey: ['feed', mode],
+    queryFn: async () => {
+      await new Promise((r) => setTimeout(r, 300));
+      if (mode === 'error') throw Error('Fixture failed');
+      return fixtures;
+    },
+  });
+  const items = [...posts, ...(query.data ?? [])].filter(
+    (_, i) => tab === 'all' || i % 2 === 0,
+  );
+  const virtual = useVirtualizer({
+    count: items.length,
+    getScrollElement: () => scroll.current,
+    estimateSize: () => 120,
+    getItemKey: (i) => items[i].id,
+    overscan: 4,
+  });
+  function post() {
+    if (!draft.trim()) return;
+    setPosts((p) => [{ id: `new-${Date.now()}`, text: draft }, ...p]);
+    setDraft('');
+    scroll.current?.scrollTo({ top: 0 });
+  }
+  return (
+    <div className={dark ? 'app dark' : 'app'}>
+      <nav>
+        <strong>✳</strong>
+        <p>Home</p>
+        <p>Explore</p>
+        <p>Profile</p>
+      </nav>
+      <main>
+        <header>
+          <Title>Home · compat-v2</Title>
+          <Button
+            label={dark ? 'Light theme' : 'Dark theme'}
+            onClick={() => setDark(!dark)}
+          />
+        </header>
+        <Tabs
+          label="Feed"
+          value={tab}
+          onStateChange={(_e, { next }) => next && setTab(next)}
+          options={[
+            { value: 'all', label: 'For you' },
+            { value: 'following', label: 'Following' },
+          ]}
+          fill
+        />
+        <section className="composer">
+          <Input
+            label="Your post"
+            value={draft}
+            onValueChange={(_e, { value }) => setDraft(value)}
+            placeholder="What is happening?"
+          />
+          <Button label="Post" priority="primary" tone="brand" onClick={post} />
+        </section>
+        <div className="fixtures">
+          <span>Fixture:</span>
+          {['success', 'loading', 'error'].map((m) => (
+            <Button
+              key={m}
+              label={m}
+              selected={mode === m}
+              onClick={() => setMode(m)}
+            />
+          ))}
+        </div>
+        {mode === 'loading' ? (
+          <p role="status">Loading fixture…</p>
+        ) : query.isPending ? (
+          <p role="status">Loading fixture…</p>
+        ) : query.isError ? (
+          <p role="alert">Could not load feed. Choose success to retry.</p>
+        ) : (
+          <div
+            className="feed"
+            ref={scroll}
+            tabIndex={0}
+            aria-label="Feed posts"
+          >
+            <div
+              style={{ height: virtual.getTotalSize(), position: 'relative' }}
+            >
+              {virtual.getVirtualItems().map((row) => {
+                const item = items[row.index];
+                return (
+                  <article
+                    key={row.key}
+                    data-index={row.index}
+                    ref={virtual.measureElement}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      transform: `translateY(${row.start}px)`,
+                    }}
+                  >
+                    <div className="avatar">
+                      {item.id.startsWith('new') ? 'Y' : 'A'}
+                    </div>
+                    <div>
+                      <b>{item.id.startsWith('new') ? 'You' : 'Avery'}</b>{' '}
+                      <span>@community · now</span>
+                      <p>{item.text}</p>
+                      {expanded.includes(item.id) && (
+                        <p>
+                          Expanded detail adds height to this virtual row,
+                          testing dynamic measurement.
+                        </p>
+                      )}
+                      <Button
+                        label={likes.includes(item.id) ? 'Unlike' : 'Like'}
+                        selected={likes.includes(item.id)}
+                        onClick={() =>
+                          setLikes((l) =>
+                            l.includes(item.id)
+                              ? l.filter((x) => x !== item.id)
+                              : [...l, item.id],
+                          )
+                        }
+                      />
+                      <Button
+                        label={expanded.includes(item.id) ? 'Less' : 'More'}
+                        priority="tertiary"
+                        onClick={() =>
+                          setExpanded((e) =>
+                            e.includes(item.id)
+                              ? e.filter((x) => x !== item.id)
+                              : [...e, item.id],
+                          )
+                        }
+                      />
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </main>
+      <aside>
+        <h2>What’s happening</h2>
+        <p>A small, local feed for testing.</p>
+      </aside>
+    </div>
+  );
+}
+createRoot(document.getElementById('root')!).render(
+  <QueryClientProvider client={client}>
+    <App />
+  </QueryClientProvider>,
+);

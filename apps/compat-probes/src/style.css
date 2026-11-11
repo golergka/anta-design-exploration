@@ -1,6 +1,31 @@
-main { max-width: 52rem; margin: auto; padding: 24px; display: grid; gap: 20px; }
-nav, .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-fieldset { display: grid; gap: 16px; border: 1px solid var(--border-3); padding: 20px; min-width: 0; }
-label { display: grid; gap: 4px; }
-form { display: grid; gap: 16px; }
-output { overflow-wrap: anywhere; }
+main {
+  max-width: 52rem;
+  margin: auto;
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+}
+nav,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+fieldset {
+  display: grid;
+  gap: 16px;
+  border: 1px solid var(--border-3);
+  padding: 20px;
+  min-width: 0;
+}
+label {
+  display: grid;
+  gap: 4px;
+}
+form {
+  display: grid;
+  gap: 16px;
+}
+output {
+  overflow-wrap: anywhere;
+}

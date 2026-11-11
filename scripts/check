@@ -1,5 +1,7 @@
 #!/bin/sh
 set -eu
+npm ci --no-audit --no-fund
+npm run format:check
 for dir in apps/*; do
   [ -f "$dir/package-lock.json" ] || continue
   (cd "$dir" && npm ci --no-audit --no-fund && npm run build)
